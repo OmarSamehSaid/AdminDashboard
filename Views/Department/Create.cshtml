@@ -1,0 +1,132 @@
+﻿@model AdminDash.Models.DepartmentVM
+
+
+
+<a class="btn mb-2 btn-outline-secondary" asp-controller="Department" asp-action="Index"><span class="fe fe-chevron-left fe-16 mr-2"></span>Return</a>
+<h2 class="mb-2 text-muted">Add Departments</h2>
+<div class="card shadow col-md-8">
+    <div class="card-body">
+        <form asp-controller="Department" asp-action="Create" method="post" class="needs-validation" novalidate>
+
+            <div class="col-md-10 mb-3">
+                <label asp-for="DepartmentName">Department Name</label>
+                <input type="text" class="form-control" asp-for="DepartmentName" required>
+                <span asp-validation-for="DepartmentName" class="text-danger-dark"></span>
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="DepartmentCode">Department Code</label>
+                <input type="text" class="form-control" asp-for="DepartmentCode" required>
+                <span asp-validation-for="DepartmentCode" class="text-danger-dark"></span>
+            </div>
+            <br />
+            <input class="btn btn-primary" type="submit" value="Submit" style="margin-left:16px !important;" />
+            <input class="btn btn-outline-danger float-right" type="reset" value="Reset" />
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src='~/js/select2.min.js'></script>
+    <script src='~/js/jquery.steps.min.js'></script>
+    <script src='~/js/jquery.validate.min.js'></script>
+    <script src='~/js/quill.min.js'></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('.select2').select2(
+            {
+                theme: 'bootstrap4',
+            });
+        $('.select2-multi').select2(
+            {
+                multiple: true,
+                theme: 'bootstrap4',
+            });
+
+        var editor = document.getElementById('editor');
+        if (editor) {
+            var toolbarOptions = [
+                [
+                    {
+                        'font': []
+                    }],
+                [
+                    {
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [
+                    {
+                        'header': 1
+                    },
+                    {
+                        'header': 2
+                    }],
+                [
+                    {
+                        'list': 'ordered'
+                    },
+                    {
+                        'list': 'bullet'
+                    }],
+                [
+                    {
+                        'script': 'sub'
+                    },
+                    {
+                        'script': 'super'
+                    }],
+                [
+                    {
+                        'indent': '-1'
+                    },
+                    {
+                        'indent': '+1'
+                    }], // outdent/indent
+                [
+                    {
+                        'direction': 'rtl'
+                    }], // text direction
+                [
+                    {
+                        'color': []
+                    },
+                    {
+                        'background': []
+                    }], // dropdown with defaults from theme
+                [
+                    {
+                        'align': []
+                    }],
+                ['clean'] // remove formatting button
+            ];
+            var quill = new Quill(editor,
+                {
+                    modules:
+                    {
+                        toolbar: toolbarOptions
+                    },
+                    theme: 'snow'
+                });
+        }
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+}

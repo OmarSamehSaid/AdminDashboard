@@ -1,0 +1,12 @@
+﻿@using Microsoft.Extensions.Localization
+@using AdminDash.Resource.Home
+@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+
+    var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    ViewBag.Title = "Home";
+}
+
+            <div class="row justify-content-center">
+                <h1 class="text-muted">@SharedLocalizer["Home"]</h1>
+            </div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminDash", "AdminDash.csproj", "{89FBB0FE-574E-431B-9AA2-D107EEB5864E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89FBB0FE-574E-431B-9AA2-D107EEB5864E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FBB0FE-574E-431B-9AA2-D107EEB5864E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FBB0FE-574E-431B-9AA2-D107EEB5864E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FBB0FE-574E-431B-9AA2-D107EEB5864E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F031DC88-D5F0-46C1-BE1C-1A4E3DB30754}
+	EndGlobalSection
+EndGlobal

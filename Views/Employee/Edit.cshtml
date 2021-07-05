@@ -1,0 +1,241 @@
+﻿@model AdminDash.Models.EmployeeVM
+@{
+    ViewBag.Title = "Edit";
+}
+
+<a class="btn mb-2 btn-outline-secondary" asp-controller="Employee" asp-action="Index"><span class="fe fe-chevron-left fe-16 mr-2"></span>Return</a>
+<h2 class="mb-2 text-muted">Edit Employee</h2>
+<div class="card shadow col-md-8">
+    <div class="card-body">
+        <form asp-controller="Employee" asp-action="Edit" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+
+            <div class="col-md-10 mb-3">
+                <label asp-for="Name">Name</label>
+                <input type="text" class="form-control" asp-for="Name" required>
+                <span asp-validation-for="Name" class="text-danger-dark"></span>
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="Email">Email</label>
+                <input type="email" class="form-control" asp-for="Email" required>
+                <span asp-validation-for="Email" class="text-danger-dark"></span>
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="Salary">Salary</label>
+                <input type="number" class="form-control" asp-for="Salary" required>
+                <span asp-validation-for="Salary" class="text-danger-dark"></span>
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="HireDate">Hire Date</label>
+                <input type="text" class="form-control" asp-for="HireDate" required>
+                <span asp-validation-for="HireDate" class="text-danger-dark"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="DepartmentId">Department</label>
+                <select class="form-control select2" asp-for="DepartmentId" asp-items="(SelectList)ViewBag.DepartmentList" required>
+                    <option value="">Choose Department</option>
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="form-row mb-3">
+                    <div class="form-group col-md-4">
+                        <label>Department</label>
+                        <select id="CountryList" class="form-control select2" asp-items="(SelectList)ViewBag.CountryList" required>
+                            <option value="">Choose Country</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>City</label>
+                        <select id="CityList" class="form-control select2" asp-items="(SelectList)ViewBag.CityList" required>
+                            <option value="">Choose City</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="DistrictId">District</label>
+                        <select class="form-control select2" asp-for="DistrictId" asp-items="(SelectList)ViewBag.DistrictList" required>
+                            <option value="">Choose District</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 mb-3">
+                <label>Photo upload</label>
+                <div class="custom-file mt-3 mb-3">
+                    <input type="file" class="custom-file-input form-control" asp-for="PhotoUrl" required>
+                    <label class="custom-file-label" asp-for="PhotoUrl">@Model.PhotoName</label>
+                </div>
+            </div>
+            <div class="col-md-10 mb-3">
+                <label asp-for="CvUrl">Cv upload</label>
+                <div class="custom-file mt-3 mb-3">
+                    <input type="file" class="custom-file-input form-control" asp-for="CvUrl" required>
+                    <label class="custom-file-label">@Model.CvName</label>
+                </div>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" asp-for="IsActive" />
+                    <label class="custom-control-label" asp-for="IsActive">Active</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Notes">Notes</label>
+                <textarea class="form-control" asp-for="Notes"></textarea>
+            </div>
+            <br />
+            <input class="btn btn-primary" type="submit" value="Edit" style="margin-left:16px !important;" />
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src='~/js/select2.min.js'></script>
+    <script src='~/js/jquery.steps.min.js'></script>
+    <script src='~/js/jquery.validate.min.js'></script>
+    <script src='~/js/uppy.min.js'></script>
+    <script src='~/js/quill.min.js'></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('.select2').select2(
+            {
+                theme: 'bootstrap4',
+            });
+        var editor = document.getElementById('editor');
+        if (editor) {
+            var toolbarOptions = [
+                [
+                    {
+                        'font': []
+                    }],
+                [
+                    {
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [
+                    {
+                        'header': 1
+                    },
+                    {
+                        'header': 2
+                    }],
+                [
+                    {
+                        'list': 'ordered'
+                    },
+                    {
+                        'list': 'bullet'
+                    }],
+                [
+                    {
+                        'script': 'sub'
+                    },
+                    {
+                        'script': 'super'
+                    }],
+                [
+                    {
+                        'indent': '-1'
+                    },
+                    {
+                        'indent': '+1'
+                    }], // outdent/indent
+                [
+                    {
+                        'direction': 'rtl'
+                    }], // text direction
+                [
+                    {
+                        'color': []
+                    },
+                    {
+                        'background': []
+                    }], // dropdown with defaults from theme
+                [
+                    {
+                        'align': []
+                    }],
+                ['clean'] // remove formatting button
+            ];
+            var quill = new Quill(editor,
+                {
+                    modules:
+                    {
+                        toolbar: toolbarOptions
+                    },
+                    theme: 'snow'
+                });
+        }
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        $('.input-money').mask("#.##0,00",
+            {
+                reverse: true
+            });
+    </script>
+    <script>
+        $(function () {
+            $("#CountryList").change(function () {
+
+                $("#CityList").empty();
+                $("#CityList").append('<option value="">Choose City</option>');
+                $("#DistrictId").empty();
+                $("#DistrictId").append('<option value="">Choose District</option>');
+                var countryId = $("#CountryList option:selected").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Employee/GetCityByCountryID",
+                    data: { CountryId: countryId },
+                    success: function (res) {
+
+                        $.each(res, function (i, e) {
+
+                            $("#CityList").append('<option value="' + e.Id + '">' + e.CityName + '</option>');
+                        })
+
+                    }
+                })
+            });
+
+            $("#CityList").change(function () {
+
+                $("#DistrictId").empty();
+                $("#DistrictId").append('<option value="">Choose District</option>');
+                var cityId = $("#CityList option:selected").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Employee/GetDistrictByCityID",
+                    data: { CityID: cityId },
+                    success: function (res) {
+
+                        $.each(res, function (i, e) {
+
+                            $("#DistrictId").append('<option value="' + e.Id + '">' + e.DistrictName + '</option>');
+                        })
+
+                    }
+                })
+            });
+        });
+    </script>
+}

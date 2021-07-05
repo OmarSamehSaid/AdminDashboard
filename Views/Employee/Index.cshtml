@@ -1,0 +1,68 @@
+﻿
+@model IEnumerable<AdminDash.Models.EmployeeVM>
+@using Microsoft.Extensions.Localization
+@using AdminDash.Resource.Employee
+@inject IStringLocalizer<SharedResource> SharedLocalizer
+@{
+    ViewBag.Title = SharedLocalizer["Employee"];
+    var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+
+<h2 class="mb-2 text-muted">@SharedLocalizer["Employee"]</h2>
+<div class="card shadow">
+    <div class="card-body">
+        <div class="col ml-auto"><a class="btn btn-outline-primary float-right ml-3" asp-controller="Employee" asp-action="Create"><span class="fe fe-user-plus fe-12 mr-2"></span>@SharedLocalizer["Addmore"]</a></div>
+        <table class="table table-hover table-striped sort datatables" id="dataTable-1">
+            <thead class="thead-dark">
+                <tr>
+                    <th>@SharedLocalizer["ID"]</th>
+                    <th>@SharedLocalizer["Name"]</th>
+                    <th>@SharedLocalizer["Email"]</th>
+                    <th>@SharedLocalizer["District"]</th>
+                    <th>@SharedLocalizer["Department"]</th>
+                    <th>@SharedLocalizer["Photo"]</th>
+                    <th>@SharedLocalizer["CV"]</th>
+                    <th>@SharedLocalizer["Details"]</th>
+                    <th>@SharedLocalizer["Edit"]</th>
+                    <th>@SharedLocalizer["Delete"]</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <th>@item.District.DistrictName</th>
+                        <td>@item.Department.DepartmentName</td>
+                        <td><div class="avatar avatar-md"><img src="~/Files/Photos/@item.PhotoName" alt="@item.Name" title="@item.Name" class="avatar-img rounded-circle"></div></td>
+                        <td><a href="~/Files/Docs/@item.CvName" class="btn mb-2 btn-outline-primary" download="download"><span class="fe fe-download fe-12 mr-2"></span>@SharedLocalizer["CV"]</a></td>
+                        <td><a asp-controller="Employee" asp-action="Details" class="btn mb-2 btn-outline-info" asp-route-id="@item.Id"><span class="fe fe-info fe-12 mr-2"></span>@SharedLocalizer["Details"]</a></td>
+                        <td><a asp-controller="Employee" asp-action="Edit" class="btn mb-2 btn-outline-secondary" asp-route-id="@item.Id"><span class="fe fe-edit fe-16 mr-2"></span>@SharedLocalizer["Edit"]</a></td>
+                        <td><a asp-controller="Employee" asp-action="Delete" class="btn mb-2 btn-outline-danger" asp-route-id="@item.Id"><span class="fe fe-trash-2 fe-16 mr-2"></span>@SharedLocalizer["Delete"]</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@section scripts {
+    <script src='~/js/jquery.dataTables.min.js'></script>
+    <script src='~/js/dataTables.bootstrap4.min.js'></script>
+    <script>
+        $('#dataTable-1').DataTable(
+            {
+                autoWidth: true,
+                "lengthMenu": [
+                    [5, 10, 25, -1],
+                    [5, 10, 25, "All"]
+                ]
+            });</script>
+}
+

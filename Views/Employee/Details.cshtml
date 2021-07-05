@@ -1,0 +1,65 @@
+﻿@model AdminDash.Models.EmployeeVM
+@{
+    ViewBag.Title = "Details";
+
+}
+
+
+
+<h2 class="mb-2 text-muted">Employee Details</h2>
+<div class="card shadow col-md-8">
+    <div class="card-body">
+        <form>
+
+            <div class="col-md-2 mb-3">
+                <label asp-for="Id">ID</label>
+                <input type="text" class="form-control" asp-for="Id" disabled>
+
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="Name">Name</label>
+                <input type="text" class="form-control" asp-for="Name" disabled>
+
+            </div>
+            <div class="col-md-10 mb-3">
+                <label asp-for="Email">Email</label>
+                <input type="text" class="form-control" asp-for="Email" disabled>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Salary">Salary</label>
+                <input type="text" class="form-control" asp-for="Salary" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="HireDate">Hire Date</label>
+                <input type="text" class="form-control" value="@Model.HireDate.Date.ToShortDateString()" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Department.DepartmentName">Department</label>
+                <input type="text" class="form-control" asp-for="Department.DepartmentName" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="District.DistrictName">District</label>
+                <input type="text" class="form-control" asp-for="District.DistrictName" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PhotoName">Photo</label>
+                <img src="~/Files/Photos/@Model.PhotoName" class="card-img" alt="@Model.Name" title="@Model.Name">
+            </div>
+
+            <div class="custom-control custom-checkbox mb-3">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" checked="@Model.IsActive" disabled />
+                    <label class="custom-control-label" for="customControlValidation1">Active</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Notes">Notes</label>
+                <textarea class="form-control" asp-for="Notes" disabled></textarea>
+            </div>
+
+            <br />
+            <a class="btn mb-2 btn-outline-primary" asp-controller="Employee" asp-action="Index"><span class="fe fe-chevron-left fe-16 mr-2"></span>Return</a>
+            <a class="btn mb-2 btn-outline-secondary" style="margin-left:16px !important;" asp-controller="Employee" asp-action="Edit" asp-route-id="@Model.Id"><span class="fe fe-edit fe-16 mr-2"></span>Edit</a>
+        </form>
+    </div>
+</div>

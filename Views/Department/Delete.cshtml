@@ -1,0 +1,29 @@
+﻿@model AdminDash.Models.DepartmentVM
+@{
+    ViewBag.Title = "Delete";
+
+}
+
+
+<a class="btn mb-2 btn-outline-secondary" asp-controller="Department" asp-action="Index"><span class="fe fe-chevron-left fe-16 mr-2"></span>Return</a>
+<h2 class="mb-2 text-muted">Delete Department</h2>
+<div class="card shadow col-md-8">
+    <div class="card-body">
+        <form asp-controller="Department" asp-action="Delete" method="post">
+
+            <div class="col-md-10 mb-3">
+                <label asp-for="DepartmentName">Department Name</label>
+                <input type="text" class="form-control" asp-for="DepartmentName" disabled>
+
+            </div>
+            <div class="col-md-8 mb-3">
+                <label asp-for="DepartmentCode">Department Code</label>
+                <input type="text" class="form-control" asp-for="DepartmentCode" disabled>
+
+            </div>
+            <br />
+            <input class="btn btn-danger" type="submit" value="Delete" style="margin-left:16px !important;" />
+        </form>
+    </div>
+</div>
+
